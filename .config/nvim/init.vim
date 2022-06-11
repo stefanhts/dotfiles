@@ -4,7 +4,6 @@ if empty(glob('~/.vim/autoload/plug.vim'))
     \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 endif
 
-call plug#begin('~/.config/vim')
 set path+=**
 set shortmess=a
 set cmdheight=2
@@ -21,37 +20,54 @@ set wildignore+=**/ios/*
 set wildignore+=**/.git/*
 
 set scrolloff=10
-" Plebvim lsp Plugins
-Plug 'neovim/nvim-lspconfig'
-Plug 'hrsh7th/cmp-nvim-lsp'
-Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
-Plug 'hrsh7th/cmp-buffer'
-Plug 'hrsh7th/nvim-cmp'
-Plug 'mattn/emmet-vim'
-Plug 'prabirshrestha/vim-lsp'
-Plug 'mattn/vim-lsp-settings'
-Plug 'nvim-lua/completion-nvim'
+"hi NonText ctermfg=bg guifg=bg
 
-" Snippets
-Plug 'L3MON4D3/LuaSnip'
-Plug 'rafamadriz/friendly-snippets'
+call plug#begin('~/.config/vim')
+  " visuals
+  Plug 'morhetz/gruvbox'
+  Plug 'vim-airline/vim-airline'
+  Plug 'vim-airline/vim-airline-themes'
+  Plug 'frazrepo/vim-rainbow'
+  
+  Plug 'nvim-lua/plenary.nvim'
+  " LSP Support
+  Plug 'neovim/nvim-lspconfig'
+  Plug 'williamboman/nvim-lsp-installer'
+  Plug 'nvim-lua/completion-nvim'
+  Plug 'kyazdani42/nvim-web-devicons'
+  Plug 'folke/trouble.nvim'
 
-Plug 'morhetz/gruvbox'
+  " Autocompletion
+  Plug 'hrsh7th/nvim-cmp'
+  Plug 'hrsh7th/cmp-buffer'
+  Plug 'hrsh7th/cmp-path'
+  Plug 'saadparwaiz1/cmp_luasnip'
+  Plug 'hrsh7th/cmp-nvim-lsp'
+  Plug 'hrsh7th/cmp-nvim-lua'
 
-" telescope requirements...
-Plug 'nvim-lua/plenary.nvim'
-Plug 'nvim-telescope/telescope.nvim'
-Plug 'nvim-telescope/telescope-fzy-native.nvim'
+  " Snippets
+  Plug 'L3MON4D3/LuaSnip'
+  Plug 'rafamadriz/friendly-snippets'
 
-Plug 'chriskempson/base16-vim'
-
-" HARPOON!!
-Plug 'mhinz/vim-rfc'
-
-" prettier
-Plug 'sbdchd/neoformat'
+  " LSP Setup
+  Plug 'VonHeikemen/lsp-zero.nvim'
 
 call plug#end()
+
+" Use completion-nvim in every buffer
+autocmd BufEnter * lua require'completion'.on_attach()
+
+" Autoformat 
+autocmd BufWritePre * lua vim.lsp.buf.formatting_sync()
+" Use <Tab> and <S-Tab> to navigate through popup menu
+inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
+inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+
+" Set completeopt to have a better completion experience
+set completeopt=menuone,noinsert,noselect
+
+" Avoid showing message extra message when using completion
+set shortmess+=c
 
 " Adding local modules
 if executable('rg')
@@ -82,26 +98,25 @@ vnoremap <leader>d "_d
 
 inoremap <C-c> <esc>
 
+" Some key bindings
+inoremap ( ()<esc>i
+inoremap { {}<esc>i
+inoremap [ []<esc>i
+inoremap " ""<esc>i
 
-fun! EmptyRegisters()
-    let regs=split('abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789/-"', '\zs')
-    for r in regs
-        call setreg(r, [])
-    endfor
-endfun
-
-" ES
-com! W w
-
-augroup highlight_yank
-    autocmd!
-    autocmd TextYankPost * silent! lua require'vim.highlight'.on_yank({timeout = 40})
-augroup END
-
-set tabstop=4 softtabstop=4
-set shiftwidth=4
+set tabstop=2 softtabstop=2
+set shiftwidth=2
 set expandtab
 set smartindent
+
+set signcolumn=yes
+
+lua <<EOF
+local lsp = require('lsp-zero')
+
+lsp.preset('recommended')
+lsp.setup()
+EOF
 
 set exrc
 set relativenumber
@@ -116,7 +131,6 @@ set nobackup
 set undodir =~/.vim/undodir
 set undofile
 set incsearch
-set termguicolors
 set scrolloff=8
 set noshowmode
 set signcolumn=yes
@@ -127,23 +141,21 @@ set cmdheight=2
 set updatetime=50
 set shortmess+=c
 
-set colorcolumn=80
-
-" Use <Tab> and <S-Tab> to navigate through popup menu
-inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
-inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
-
-" Set completeopt to have a better completion experience
-set completeopt=menuone,noinsert,noselect
-
-" Avoid showing message extra message when using completion
-set shortmess+=c
-" Use completion-nvim in every buffer
-autocmd BufEnter * lua require'completion'.on_attach()
-lua << EOF
-require'lspconfig'.pyright.setup{}
-EOF
-let g:gruvbox_contrast_dark = 'hard'
+let g:gruvbox_italic=1
+let g:airline#extensions#tabline#enabled = 1
 colorscheme gruvbox
-set background=dark
-lua require'lspconfig'.gopls.setup{on_attach=require'completion'.on_attach}
+" status bar
+let g:airline_theme='angr'
+" rainbow brackets
+let g:rainbow_active = 1
+
+let g:rainbow_load_separately = [
+    \ [ '*' , [['(', ')'], ['\[', '\]'], ['{', '}']] ],
+    \ [ '*.tex' , [['(', ')'], ['\[', '\]']] ],
+    \ [ '*.cpp' , [['(', ')'], ['\[', '\]'], ['{', '}']] ],
+    \ [ '*.{html,htm}' , [['(', ')'], ['\[', '\]'], ['{', '}'], ['<\a[^>]*>', '</[^>]*>']] ],
+    \ ]
+
+let g:rainbow_guifgs = ['RoyalBlue3', 'DarkOrange3', 'DarkOrchid3', 'FireBrick']
+let g:rainbow_ctermfgs = ['lightblue', 'lightgreen', 'yellow', 'red', 'magenta']
+
