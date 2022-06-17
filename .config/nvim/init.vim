@@ -4,6 +4,7 @@ if empty(glob('~/.vim/autoload/plug.vim'))
     \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 endif
 
+
 set path+=**
 set shortmess=a
 set cmdheight=2
@@ -24,18 +25,28 @@ set scrolloff=10
 
 call plug#begin('~/.config/vim')
   " visuals
-  Plug 'morhetz/gruvbox'
+  " Plug 'morhetz/gruvbox'
+  Plug 'folke/tokyonight.nvim', { 'branch': 'main' }
   Plug 'vim-airline/vim-airline'
   Plug 'vim-airline/vim-airline-themes'
   Plug 'frazrepo/vim-rainbow'
-  
+
   Plug 'nvim-lua/plenary.nvim'
+  Plug 'nvim-telescope/telescope.nvim'
+  Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+  Plug 'w0rp/ale'
+
+  " Git blame
+  Plug 'tveskag/nvim-blame-line'
+
   " LSP Support
   Plug 'neovim/nvim-lspconfig'
   Plug 'williamboman/nvim-lsp-installer'
   Plug 'nvim-lua/completion-nvim'
   Plug 'kyazdani42/nvim-web-devicons'
-  Plug 'folke/trouble.nvim'
+  Plug 'jose-elias-alvarez/null-ls.nvim'
+  Plug 'jose-elias-alvarez/nvim-lsp-ts-utils'
+  " "Plug 'folke/trouble.nvim'
 
   " Autocompletion
   Plug 'hrsh7th/nvim-cmp'
@@ -49,16 +60,30 @@ call plug#begin('~/.config/vim')
   Plug 'L3MON4D3/LuaSnip'
   Plug 'rafamadriz/friendly-snippets'
 
-  " LSP Setup
-  Plug 'VonHeikemen/lsp-zero.nvim'
 
 call plug#end()
 
+lua require("lsp-config")
 " Use completion-nvim in every buffer
-autocmd BufEnter * lua require'completion'.on_attach()
+silent autocmd BufEnter * lua require'completion'.on_attach()
+"Git blame on startup
+autocmd BufEnter * EnableBlameLine
+
+" Telescope
+" Find files using Telescope command-line sugar.
+nnoremap <leader>ff <cmd>Telescope find_files<cr>
+nnoremap <leader>fg <cmd>Telescope live_grep<cr>
+nnoremap <leader>fb <cmd>Telescope buffers<cr>
+nnoremap <leader>fh <cmd>Telescope help_tags<cr>
+
+" Using Lua functions
+nnoremap <leader>ff <cmd>lua require('telescope.builtin').find_files()<cr>
+nnoremap <leader>fg <cmd>lua require('telescope.builtin').live_grep()<cr>
+nnoremap <leader>fb <cmd>lua require('telescope.builtin').buffers()<cr>
+nnoremap <leader>fh <cmd>lua require('telescope.builtin').help_tags()<cr>
 
 " Autoformat 
-autocmd BufWritePre * lua vim.lsp.buf.formatting_sync()
+"autocmd BufWritePre * lua vim.lsp.buf.formatting_sync()
 " Use <Tab> and <S-Tab> to navigate through popup menu
 inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
@@ -75,7 +100,6 @@ if executable('rg')
 endif
 
 let loaded_matchparen = 1
-let mapleader = " "
 
 vnoremap J :m '>+1<CR>gv=gv
 vnoremap K :m '<-2<CR>gv=gv
@@ -111,13 +135,6 @@ set smartindent
 
 set signcolumn=yes
 
-lua <<EOF
-local lsp = require('lsp-zero')
-
-lsp.preset('recommended')
-lsp.setup()
-EOF
-
 set exrc
 set relativenumber
 set nu
@@ -141,9 +158,11 @@ set cmdheight=2
 set updatetime=50
 set shortmess+=c
 
-let g:gruvbox_italic=1
+""let g:gruvbox_italic=1
 let g:airline#extensions#tabline#enabled = 1
-colorscheme gruvbox
+""colorscheme gruvbox
+let g:tokyonight_style = "night"
+colorscheme tokyonight
 " status bar
 let g:airline_theme='angr'
 " rainbow brackets
