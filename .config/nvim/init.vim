@@ -4,7 +4,6 @@ if empty(glob('~/.vim/autoload/plug.vim'))
     \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 endif
 
-
 set path+=**
 set shortmess=a
 set cmdheight=2
@@ -21,112 +20,13 @@ set wildignore+=**/ios/*
 set wildignore+=**/.git/*
 
 set scrolloff=10
-"hi NonText ctermfg=bg guifg=bg
-
-call plug#begin('~/.config/vim')
-  " visuals
-  " Plug 'morhetz/gruvbox'
-  Plug 'folke/tokyonight.nvim', { 'branch': 'main' }
-  Plug 'vim-airline/vim-airline'
-  Plug 'vim-airline/vim-airline-themes'
-  Plug 'frazrepo/vim-rainbow'
-
-  Plug 'nvim-lua/plenary.nvim'
-  Plug 'nvim-telescope/telescope.nvim'
-  Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
-  Plug 'w0rp/ale'
-
-  " Git blame
-  Plug 'tveskag/nvim-blame-line'
-
-  " LSP Support
-  Plug 'neovim/nvim-lspconfig'
-  Plug 'williamboman/nvim-lsp-installer'
-  Plug 'nvim-lua/completion-nvim'
-  Plug 'kyazdani42/nvim-web-devicons'
-  Plug 'jose-elias-alvarez/null-ls.nvim'
-  Plug 'jose-elias-alvarez/nvim-lsp-ts-utils'
-  " "Plug 'folke/trouble.nvim'
-
-  " Autocompletion
-  Plug 'hrsh7th/nvim-cmp'
-  Plug 'hrsh7th/cmp-buffer'
-  Plug 'hrsh7th/cmp-path'
-  Plug 'saadparwaiz1/cmp_luasnip'
-  Plug 'hrsh7th/cmp-nvim-lsp'
-  Plug 'hrsh7th/cmp-nvim-lua'
-
-  " Snippets
-  Plug 'L3MON4D3/LuaSnip'
-  Plug 'rafamadriz/friendly-snippets'
-
-
-call plug#end()
-
-lua require("lsp-config")
-" Use completion-nvim in every buffer
-silent autocmd BufEnter * lua require'completion'.on_attach()
-"Git blame on startup
-autocmd BufEnter * EnableBlameLine
-
-" Telescope
-" Find files using Telescope command-line sugar.
-nnoremap <leader>ff <cmd>Telescope find_files<cr>
-nnoremap <leader>fg <cmd>Telescope live_grep<cr>
-nnoremap <leader>fb <cmd>Telescope buffers<cr>
-nnoremap <leader>fh <cmd>Telescope help_tags<cr>
-
-" Using Lua functions
-nnoremap <leader>ff <cmd>lua require('telescope.builtin').find_files()<cr>
-nnoremap <leader>fg <cmd>lua require('telescope.builtin').live_grep()<cr>
-nnoremap <leader>fb <cmd>lua require('telescope.builtin').buffers()<cr>
-nnoremap <leader>fh <cmd>lua require('telescope.builtin').help_tags()<cr>
-
-" Autoformat 
-"autocmd BufWritePre * lua vim.lsp.buf.formatting_sync()
-" Use <Tab> and <S-Tab> to navigate through popup menu
-inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
-inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+let mapleader=" "
 
 " Set completeopt to have a better completion experience
 set completeopt=menuone,noinsert,noselect
 
 " Avoid showing message extra message when using completion
 set shortmess+=c
-
-" Adding local modules
-if executable('rg')
-    let g:rg_derive_root='true'
-endif
-
-let loaded_matchparen = 1
-
-vnoremap J :m '>+1<CR>gv=gv
-vnoremap K :m '<-2<CR>gv=gv
-
-nnoremap Y yg$
-nnoremap n nzzzv
-nnoremap N Nzzzv
-nnoremap J mzJ`z
-
-" greatest remap ever
-xnoremap <leader>p "_dP
-
-" next greatest remap ever : asbjornHaland
-nnoremap <leader>y "+y
-vnoremap <leader>y "+y
-nnoremap <leader>Y gg"+yG
-
-nnoremap <leader>d "_d
-vnoremap <leader>d "_d
-
-inoremap <C-c> <esc>
-
-" Some key bindings
-inoremap ( ()<esc>i
-inoremap { {}<esc>i
-inoremap [ []<esc>i
-inoremap " ""<esc>i
 
 set tabstop=2 softtabstop=2
 set shiftwidth=2
@@ -136,10 +36,8 @@ set smartindent
 set signcolumn=yes
 
 set exrc
-set relativenumber
 set nu
 set nohlsearch
-set hidden
 set noerrorbells
 set nowrap
 set smartcase
@@ -148,9 +46,9 @@ set nobackup
 set undodir =~/.vim/undodir
 set undofile
 set incsearch
-set scrolloff=8
 set noshowmode
 set signcolumn=yes
+set termguicolors
 
 " Give more space for displaying messages.
 set cmdheight=2
@@ -158,23 +56,178 @@ set cmdheight=2
 set updatetime=50
 set shortmess+=c
 
-""let g:gruvbox_italic=1
+" -- Plugins
+
+call plug#begin('~/.config/nvim/plugged')
+
+" lsp
+Plug 'neovim/nvim-lspconfig'
+
+" Neovim Tree sitter
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+Plug 'nvim-treesitter/playground'
+Plug 'romgrk/nvim-treesitter-context'
+
+" Git blame
+Plug 'tpope/vim-fugitive'
+
+Plug 'mbbill/undotree'
+
+" telescope requirements...
+Plug 'nvim-lua/popup.nvim'
+Plug 'nvim-lua/plenary.nvim'
+Plug 'nvim-telescope/telescope.nvim'
+Plug 'nvim-telescope/telescope-fzy-native.nvim'
+
+" prettier
+Plug 'sbdchd/neoformat'
+
+" colorscheme
+" Plug 'embark-theme/vim', { 'as': 'embark', 'branch': 'main' }
+Plug 'morhetz/gruvbox'
+Plug 'rose-pine/neovim'
+
+Plug 'hrsh7th/cmp-nvim-lsp'
+Plug 'hrsh7th/cmp-buffer'
+Plug 'hrsh7th/cmp-path'
+Plug 'hrsh7th/cmp-cmdline'
+Plug 'hrsh7th/nvim-cmp'
+
+" For vsnip users.
+Plug 'hrsh7th/cmp-vsnip'
+Plug 'hrsh7th/vim-vsnip'
+
+" For luasnip users.
+Plug 'L3MON4D3/LuaSnip'
+Plug 'saadparwaiz1/cmp_luasnip'
+
+" For ultisnips users.
+Plug 'SirVer/ultisnips'
+Plug 'quangnguyen30192/cmp-nvim-ultisnips'
+
+" For snippy users.
+Plug 'dcampos/nvim-snippy'
+Plug 'dcampos/cmp-snippy'
+
+" Status bar
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+
+" Formatting
+Plug 'sbdchd/neoformat'
+call plug#end()
+
 let g:airline#extensions#tabline#enabled = 1
-""colorscheme gruvbox
-let g:tokyonight_style = "night"
-colorscheme tokyonight
-" status bar
-let g:airline_theme='angr'
-" rainbow brackets
-let g:rainbow_active = 1
+let g:airline_theme='violet'
 
-let g:rainbow_load_separately = [
-    \ [ '*' , [['(', ')'], ['\[', '\]'], ['{', '}']] ],
-    \ [ '*.tex' , [['(', ')'], ['\[', '\]']] ],
-    \ [ '*.cpp' , [['(', ')'], ['\[', '\]'], ['{', '}']] ],
-    \ [ '*.{html,htm}' , [['(', ')'], ['\[', '\]'], ['{', '}'], ['<\a[^>]*>', '</[^>]*>']] ],
-    \ ]
+lua <<EOF
+  -- Setup nvim-cmp.
+  local cmp = require'cmp'
 
-let g:rainbow_guifgs = ['RoyalBlue3', 'DarkOrange3', 'DarkOrchid3', 'FireBrick']
-let g:rainbow_ctermfgs = ['lightblue', 'lightgreen', 'yellow', 'red', 'magenta']
+  cmp.setup({
+    snippet = {
+      -- REQUIRED - you must specify a snippet engine
+      expand = function(args)
+        vim.fn["vsnip#anonymous"](args.body) -- For `vsnip` users.
+        -- require('luasnip').lsp_expand(args.body) -- For `luasnip` users.
+        -- require('snippy').expand_snippet(args.body) -- For `snippy` users.
+        -- vim.fn["UltiSnips#Anon"](args.body) -- For `ultisnips` users.
+      end,
+    },
+    window = {
+      -- completion = cmp.config.window.bordered(),
+      -- documentation = cmp.config.window.bordered(),
+    },
+    mapping = cmp.mapping.preset.insert({
+      ['<C-b>'] = cmp.mapping.scroll_docs(-4),
+      ['<C-f>'] = cmp.mapping.scroll_docs(4),
+      ['<C-Space>'] = cmp.mapping.complete(),
+      ['<C-e>'] = cmp.mapping.abort(),
+      ['<CR>'] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
+    }),
+    sources = cmp.config.sources({
+      { name = 'nvim_lsp' },
+      { name = 'vsnip' }, -- For vsnip users.
+      -- { name = 'luasnip' }, -- For luasnip users.
+      -- { name = 'ultisnips' }, -- For ultisnips users.
+      -- { name = 'snippy' }, -- For snippy users.
+    }, {
+      { name = 'buffer' },
+    })
+  })
 
+
+  -- Set configuration for specific filetype.
+  cmp.setup.filetype('gitcommit', {
+    sources = cmp.config.sources({
+      { name = 'cmp_git' }, -- You can specify the `cmp_git` source if you were installed it.
+    }, {
+      { name = 'buffer' },
+    })
+  })
+
+  -- Use buffer source for `/` (if you enabled `native_menu`, this won't work anymore).
+  cmp.setup.cmdline('/', {
+    mapping = cmp.mapping.preset.cmdline(),
+    sources = {
+      { name = 'buffer' }
+    }
+  })
+
+  -- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
+  cmp.setup.cmdline(':', {
+    mapping = cmp.mapping.preset.cmdline(),
+    sources = cmp.config.sources({
+      { name = 'path' }
+    }, {
+      { name = 'cmdline' }
+    })
+  })
+
+  -- Setup lspconfig.
+  local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
+  -- Replace <YOUR_LSP_SERVER> with each lsp server you've enabled.
+  require('lspconfig')['tsserver'].setup {
+    capabilities = capabilities
+  }
+EOF
+
+lua require('stefanhts')
+
+" Keymaps
+nnoremap <leader>u :UndotreeShow<CR>
+nnoremap <leader>pv :Ex<CR>
+nnoremap Y yg$
+nnoremap n nzzzv
+nnoremap N Nzzzv
+nnoremap J mzJ`z
+
+nnoremap <leader>y "+y
+vnoremap <leader>y "+y
+
+" Open file explorer on left
+nnoremap ff :Sex!<Enter>
+nnoremap <leader>f :Telescope live_grep<Enter>
+nnoremap <leader>ps :lua require('telescope.builtin').grep_string({ search = vim.fn.input("Grep For > ")})<CR>
+nnoremap <C-p> :lua require('telescope.builtin').git_files()<CR>
+nnoremap <Leader>pf :lua require('telescope.builtin').find_files()<CR>
+
+nnoremap <leader>pw :lua require('telescope.builtin').grep_string { search = vim.fn.expand("<cword>") }<CR>
+nnoremap <leader>pb :lua require('telescope.builtin').buffers()<CR>
+nnoremap <leader>vh :lua require('telescope.builtin').help_tags()<CR>
+
+nnoremap qq <Esc>:wq<CR>
+nnoremap QQ <Esc>:q!<CR>
+
+colorscheme rose-pine
+nmap <leader>Y "+y
+
+" Highlight yank
+augroup highlight_yank
+    autocmd!
+    autocmd TextYankPost * silent! lua require'vim.highlight'.on_yank({timeout = 40})
+augroup END
+
+let g:neoformat_try_node_exe = 1
+autocmd BufWritePre *.js Neoformat
+autocmd BufWritePre *.ts Neoformat
