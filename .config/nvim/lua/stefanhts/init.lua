@@ -1,1 +1,2 @@
-require('stefanhts.lsp')
+require("stefanhts.remap")
+require("stefanhts.set")
