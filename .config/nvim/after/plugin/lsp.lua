@@ -7,9 +7,28 @@ lsp.ensure_installed({
   'rust_analyzer',
 })
 
+  ocaml = function()
+    autocmd_format(false)
+
+    -- Display type information
+    autocmd_clear { group = augroup_codelens, buffer = 0 }
+    autocmd {
+      { "BufEnter", "BufWritePost", "CursorHold" },
+      augroup_codelens,
+      require("tj.lsp.codelens").refresh_virtlines,
+      0,
+    }
+
+    vim.keymap.set(
+      "n",
+      "<space>tt",
+      require("tj.lsp.codelens").toggle_virtlines,
+      { silent = true, desc = "[T]oggle [T]ypes", buffer = 0 }
+    )
+  end,
+
 -- Fix Undefined global 'vim'
 lsp.nvim_workspace()
-
 
 local cmp = require('cmp')
 local cmp_select = {behavior = cmp.SelectBehavior.Select}
@@ -30,10 +49,10 @@ lsp.setup_nvim_cmp({
 lsp.set_preferences({
     suggest_lsp_servers = false,
     sign_icons = {
-        error = 'E',
-        warn = 'W',
-        hint = 'H',
-        info = 'I'
+        error = '🔥',
+        warn = '⚠️',
+        hint = '💡',
+        info = 'ℹ️'
     }
 })
 
