@@ -24,7 +24,7 @@
 #:     italic_font      Operator Mono Book Italic
 #:     bold_italic_font Operator Mono Medium Italic
 
-font_size 17.0
+font_size 20.0
 
 #: Font size (in pts)
 
@@ -2345,9 +2345,8 @@ dim_opacity 0.5
 
 font_family Liga SFMono Nerd Font
 
-
-
 # BEGIN_KITTY_THEME
-# Dimmed Monokai
+# IR Black
 include current-theme.conf
+
 # END_KITTY_THEME
