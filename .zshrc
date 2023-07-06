@@ -15,22 +15,18 @@ plugins=(git branch colorize)
 
 source $ZSH/oh-my-zsh.sh
 
+# my main aliases
 alias vim=nvim
 alias :q=exit
 alias .=clear
 alias ..="cd .."
 alias vimfig="nvim ~/.config/nvim"
 alias config="nvim ~/.zshrc"
-alias k=kubectl
-alias l0=layer0
-alias utils="cd utils"
 alias src="source ~/.zshrc"
-alias repo="cd repos"
 alias icat="kitty +kitten icat"
 alias kitfig="nvim ~/.config/kitty/kitty.conf"
 alias d="kitty +kitten diff"
 alias theme="kitty +kitten themes"
-# User configuration
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
@@ -48,9 +44,16 @@ export PATH="/usr/local/bin/od:$PATH"
 export PATH="$PATH:$(go env GOPATH)/bin"
 export KUBECONFIG="$KUBECONFIG:/Users/stefan.heller/.kube/layer0-dev"
 
-# CDPATH to quickly cd to repo folders
+# CDPATH to quickly cd to repo folders (work)
 export CDPATH=".:$HOME/Work/repos:$CDPATH"
 export CDPATH=":$HOME/Work/utils:$CDPATH"
+
+
+# CDPATH to quickly cd to repo folders (personal)
+export CDPATH=".:$HOME/Documents/Projects:$CDPATH"
+export CDPATH=".:$HOME/Documents/Videos:$CDPATH"
+export CDPATH=".:$HOME/Documents/Personal:$CDPATH"
+
 
 # opam configuration
 [[ ! -r /Users/stefan.heller/.opam/opam-init/init.zsh ]] || source /Users/stefan.heller/.opam/opam-init/init.zsh  > /dev/null 2> /dev/null
@@ -59,9 +62,3 @@ export CDPATH=":$HOME/Work/utils:$CDPATH"
 vr() {
     cd $1 && nvim .
 }
-
-show() {
-    rg -wHn $1 $2
-}
-
-
