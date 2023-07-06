@@ -27,6 +27,7 @@ alias icat="kitty +kitten icat"
 alias kitfig="nvim ~/.config/kitty/kitty.conf"
 alias d="kitty +kitten diff"
 alias theme="kitty +kitten themes"
+alias ls=pls
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
@@ -62,3 +63,6 @@ export CDPATH=".:$HOME/Documents/Personal:$CDPATH"
 vr() {
     cd $1 && nvim .
 }
+
+# Created by `pipx` on 2023-07-06 15:29:01
+export PATH="$PATH:/Users/stefan.heller/.local/bin"
