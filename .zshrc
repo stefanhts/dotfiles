@@ -66,3 +66,4 @@ vr() {
 
 # Created by `pipx` on 2023-07-06 15:29:01
 export PATH="$PATH:/Users/stefan.heller/.local/bin"
+eval $(thefuck --alias)

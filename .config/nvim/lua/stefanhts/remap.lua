@@ -30,3 +30,6 @@ vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><
 
 vim.keymap.set("n", ",", "f,")
 vim.keymap.set("v", ",", "f,")
+
+vim.keymap.set("n", "<leader>h", "<CR>ws")
+vim.keymap.set("n", "<leader>v", "<CR>wv")
