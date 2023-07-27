@@ -28,6 +28,7 @@ alias kitfig="nvim ~/.config/kitty/kitty.conf"
 alias d="kitty +kitten diff"
 alias theme="kitty +kitten themes"
 alias ls=pls
+alias kubectl=kubecolor
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
@@ -40,6 +41,7 @@ unalias gk
 alias python=python3
 export PATH="/opt/homebrew/opt/postgresql@15/bin:$PATH"
 export PATH="/usr/local/opt/mongodb-community@4.4/bin:$PATH"
+export PATH="$HOME/bin:$PATH"
 export GOPATH=$HOME/go
 export PATH="/usr/local/bin/od:$PATH"
 export PATH="$PATH:$(go env GOPATH)/bin"
@@ -62,6 +64,10 @@ export CDPATH=".:$HOME/Documents/Personal:$CDPATH"
 
 vr() {
     cd $1 && nvim .
+}
+
+name() {
+    wezterm cli rename-workspace $1
 }
 
 # Created by `pipx` on 2023-07-06 15:29:01
