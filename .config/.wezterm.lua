@@ -73,6 +73,13 @@ config.keys = {
             name = 'default',
         },
     },
+    {
+        key = '9',
+        mods = 'CTRL',
+        action = act.ShowLauncherArgs {
+            flags = 'WORKSPACES'
+        }
+    },
     -- Switch to a monitoring workspace, which will have `top` launched into it
     {
         key = 'u',
@@ -93,7 +100,7 @@ config.keys = {
         key = "h",
         mods = 'CTRL',
         action = act.ShowLauncherArgs {
-            flags = 'FUZZY|WORKSPACES|DOMAINS',
+            flags = 'WORKSPACES|DOMAINS',
         },
     },
 }

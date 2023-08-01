@@ -23,12 +23,16 @@ alias ..="cd .."
 alias vimfig="nvim ~/.config/nvim"
 alias config="nvim ~/.zshrc"
 alias src="source ~/.zshrc"
-alias icat="kitty +kitten icat"
 alias kitfig="nvim ~/.config/kitty/kitty.conf"
-alias d="kitty +kitten diff"
-alias theme="kitty +kitten themes"
+alias wezfig="nvim ~/.wezterm.lua"
+alias l0="layer0"
+alias kx="kubectx"
+alias kn="kubens"
+alias k="kubecolor"
 alias ls=pls
 alias kubectl=kubecolor
+alias kubesync="layer0 kubeconfig sync"
+alias notes="nvim ~/Work/notes"
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
@@ -48,6 +52,7 @@ export PATH="$PATH:$(go env GOPATH)/bin"
 export KUBECONFIG="$KUBECONFIG:/Users/stefan.heller/.kube/layer0-dev"
 
 # CDPATH to quickly cd to repo folders (work)
+export CDPATH=".:$HOME/Work/notes:$CDPATH"
 export CDPATH=".:$HOME/Work/repos:$CDPATH"
 export CDPATH=":$HOME/Work/utils:$CDPATH"
 
@@ -68,7 +73,25 @@ vr() {
 
 name() {
     wezterm cli rename-workspace $1
+    echo "workspace ==> $1"
 }
+
+kscale() {
+    kubectl scale --replicas $1 deploy/main
+}
+
+l0-switch() {
+    kubectx "layer0-dev-$1"
+}
+
+l0sync-fast() {
+    layer0 space sync $1 --layer0-base-ref $2 --out-of-sync-only "true" --skip-tests --skip-infra
+}
+
+l0dev() {
+    layer0 login dev; layer0 profile select dev
+}
+
 
 # Created by `pipx` on 2023-07-06 15:29:01
 export PATH="$PATH:/Users/stefan.heller/.local/bin"
