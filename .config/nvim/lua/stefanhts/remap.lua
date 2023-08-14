@@ -24,7 +24,7 @@ vim.keymap.set("n", "<C-j>", "<cmd>cprev<CR>zz")
 vim.keymap.set("n", "<leader>k", "<cmd>lnext<CR>zz")
 vim.keymap.set("n", "<leader>j", "<cmd>lprev<CR>zz")
 
-vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
+vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gIc<Left><Left><Left><Left>]])
 
 vim.keymap.set("n", ",", "f,")
 vim.keymap.set("v", ",", "f,")
@@ -35,3 +35,9 @@ vim.keymap.set("n", "<leader>v", "<CR>wv")
 vim.keymap.set("n", "<C-d>", vim.cmd.cclose)
 vim.keymap.set("i", "<C-d>", vim.cmd.cclose)
 vim.keymap.set("v", "<C-d>", vim.cmd.cclose)
+
+vim.keymap.set("n", "<leader>vvf", "<Esc>:e ~/.config/nvim<Enter>")
+
+
+-- Nice remap to make Go less painfull
+vim.keymap.set("n", "<leader>ee", "oif err != nil {<CR>}<Esc>Oreturn err")

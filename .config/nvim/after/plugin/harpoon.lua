@@ -10,5 +10,4 @@ vim.keymap.set("n", "gi", function() ui.nav_file(2) end)
 vim.keymap.set("n", "go", function() ui.nav_file(1) end)
 
 vim.keymap.set("n", "<leader>n", function() ui.nav_next() end)
-vim.keymap.set("n", "<leader>m", function () ui.nav_prev() end)
-
+vim.keymap.set("n", "<leader>m", function() ui.nav_prev() end)

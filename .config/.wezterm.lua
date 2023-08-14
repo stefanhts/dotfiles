@@ -19,7 +19,6 @@ config.font_size = 19
 config.color_scheme = "Dracula (Official)"
 config.tab_bar_at_bottom = true
 config.use_fancy_tab_bar = false
-config.window_decorations = "RESIZE"
 
 wezterm.on('update-right-status', function(window, pane)
     window:set_right_status(window:active_workspace())
