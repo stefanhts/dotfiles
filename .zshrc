@@ -33,6 +33,8 @@ alias k="kubecolor"
 alias kubectl=kubecolor
 alias kubesync="layer0 kubeconfig sync"
 
+alias heatmap="git log --pretty=format: --name-only | sort | uniq -c | sort -rg | head -10"
+
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 

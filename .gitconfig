@@ -1,0 +1,18 @@
+[user]
+	name = Stefan Heller
+	email = stefan.heller@okta.com
+[core]
+    editor = nvim
+	excludesfile = /Users/stefan.heller/.gitignore
+[url "git@github.com:"]
+	insteadOf = https://github.com/
+[init]
+	defaultBranch = main
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
+[alias]
+    what = diff --cached
+    oneline = log --oneline
