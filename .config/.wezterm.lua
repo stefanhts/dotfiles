@@ -1,6 +1,7 @@
 -- Pull in the wezterm API
 local wezterm = require 'wezterm'
 local act = wezterm.action
+local mux = wezterm.mux
 
 -- This table will hold the configuration.
 local config = {}
@@ -23,7 +24,6 @@ config.use_fancy_tab_bar = false
 wezterm.on('update-right-status', function(window, pane)
     window:set_right_status(window:active_workspace())
 end)
-
 
 config.keys = {
     -- ToggleFullScreen
@@ -64,19 +64,43 @@ config.keys = {
         mods = 'SHIFT',
         action = act.ActivatePaneDirection 'Down',
     },
+    -- Cycle Tabs
+    {
+        key = 'h', mods = 'ALT', action = act.ActivateTabRelative(-1)
+    },
+    {
+        key = 'l', mods = 'ALT', action = act.ActivateTabRelative(1)
+    },
     -- Switch to the default workspace
     {
-        key = 'y',
+        key = 'W',
         mods = 'CTRL|SHIFT',
-        action = act.SwitchToWorkspace {
-            name = 'default',
+        action = act.PromptInputLine {
+            description = wezterm.format {
+                { Attribute = { Intensity = 'Bold' } },
+                { Foreground = { AnsiColor = 'Fuchsia' } },
+                { Text = 'Enter name for new workspace' },
+            },
+            action = wezterm.action_callback(function(window, pane, line)
+                -- line will be `nil` if they hit escape without entering anything
+                -- An empty string if they just hit enter
+                -- Or the actual line of text they wrote
+                if line then
+                    window:perform_action(
+                        act.SwitchToWorkspace {
+                            name = line,
+                        },
+                        pane
+                    )
+                end
+            end),
         },
     },
     {
-        key = '9',
+        key = 'h',
         mods = 'CTRL',
         action = act.ShowLauncherArgs {
-            flags = 'WORKSPACES'
+            flags = 'FUZZY|WORKSPACES'
         }
     },
     -- Switch to a monitoring workspace, which will have `top` launched into it
@@ -84,7 +108,7 @@ config.keys = {
         key = 'u',
         mods = 'CTRL|SHIFT',
         action = act.SwitchToWorkspace {
-            name = 'monitoring',
+            name = 'github-status',
             spawn = {
                 args = { 'top' },
             },
@@ -93,16 +117,37 @@ config.keys = {
     { key = 'l', mods = 'CTRL',       action = wezterm.action.ShowLauncher },
     -- Create a new workspace with a random name and switch to it
     { key = 'i', mods = 'CTRL|SHIFT', action = act.SwitchToWorkspace },
-    -- Show the launcher in fuzzy selection mode and have it list all workspaces
-    -- and allow activating one.
-    {
-        key = "h",
-        mods = 'CTRL',
-        action = act.ShowLauncherArgs {
-            flags = 'WORKSPACES|DOMAINS',
-        },
-    },
+    { key = 'l', mods = 'CTRL|SHIFT', action = act.SwitchWorkspaceRelative(1) },
+    { key = 'h', mods = 'CTRL|SHIFT', action = act.SwitchWorkspaceRelative(-1) },
 }
+
+wezterm.on('gui-startup', function(cmd)
+    local args = {}
+    if cmd then
+        args = cmd.args
+    end
+
+    local project_dir = wezterm.home_dir .. '/Work/repos/'
+    local tab, build_pane, window = mux.spawn_window {
+        workspace = 'coding',
+        cwd = project_dir,
+        args = args,
+    }
+    local editor_pane = build_pane:split {
+        direction = 'Left',
+        size = 0.6,
+        cwd = project_dir,
+    }
+    build_pane:send_text 'nvim .\n'
+
+    local notes_dir = wezterm.home_dir .. '/Work/notes'
+    local tab, pane, window = mux.spawn_window {
+        cwd = notes_dir,
+        workspace = 'notes',
+    }
+    pane:send_text 'nvim . \n'
+    mux.set_active_workspace 'coding'
+end)
 
 
 -- and finally, return the configuration to wezterm

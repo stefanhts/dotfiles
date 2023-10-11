@@ -1,6 +1,10 @@
 #!/bin/bash
 # Setup script for dotfiles
 
+# Install dependencies
+brew install neovim
+brew install wezterm
+
 rm -rf ~/.config
 rm ~/.zshrc
 rm ~/.wezterm.lua

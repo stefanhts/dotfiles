@@ -26,6 +26,7 @@ alias src="source ~/.zshrc"
 alias kitfig="nvim ~/.config/kitty/kitty.conf"
 alias wezfig="nvim ~/.wezterm.lua"
 alias l0="layer0"
+alias l0local="$GOPATH/bin/layer0 --profile local"
 alias kx="kubectx"
 alias kn="kubens"
 alias k="kubecolor"
@@ -62,6 +63,8 @@ export CDPATH=":$HOME/Work/utils:$CDPATH"
 export CDPATH=".:$HOME/Documents/Projects:$CDPATH"
 export CDPATH=".:$HOME/Documents/Videos:$CDPATH"
 export CDPATH=".:$HOME/Documents/Personal:$CDPATH"
+
+export REPOS="$HOME/Work/repos/"
 
 
 note_cmd="$HOME/Work/notes"
@@ -102,6 +105,16 @@ notes() {
     else
         echo "opening notes...";
         nvim $note_cmd/$1.md
+    fi
+}
+
+hist() {
+    if [[ $1 == "-v" ]]; then
+        history | grep --color $2 | nvim
+    elif [[ $1 == "-g" ]] then
+        history | grep --color $2
+    else
+        history | fzf
     fi
 }
 
