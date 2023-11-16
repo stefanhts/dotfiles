@@ -8,6 +8,8 @@ local builtin = require('telescope.builtin')
 
 vim.keymap.set('n', '<leader>o', builtin.oldfiles, { desc = '[?] Find recently opened files' })
 vim.keymap.set('n', '<leader>b', builtin.buffers, { desc = '[ ] Find existing buffers' })
+vim.keymap.set('n', '<leader>gg', builtin.git_files, { desc = '[?] Find git files' })
+vim.keymap.set('n', '<leader>fc', builtin.current_buffer_fuzzy_find, { desc = '[ ] Fuzzy find in current buffer' })
 vim.keymap.set('n', '<leader>/', builtin.current_buffer_fuzzy_find,
     { desc = '[ ] Find existing buffers' })
 

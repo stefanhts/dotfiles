@@ -30,6 +30,7 @@ alias l0local="$GOPATH/bin/layer0 --profile local"
 alias kx="kubectx"
 alias kn="kubens"
 alias k="kubecolor"
+alias ls="eza -l"
 # alias ls=pls
 alias kubectl=kubecolor
 alias kubesync="layer0 kubeconfig sync"
@@ -65,9 +66,9 @@ export CDPATH=".:$HOME/Documents/Videos:$CDPATH"
 export CDPATH=".:$HOME/Documents/Personal:$CDPATH"
 
 export REPOS="$HOME/Work/repos/"
+alias repos="cd $REPOS"
 
-
-note_cmd="$HOME/Work/notes"
+alias notes="cd $HOME/Work/notes"
 
 #
 # Functions
@@ -98,16 +99,6 @@ l0dev() {
     layer0 login dev; layer0 profile select dev
 }
 
-
-notes() {
-    if [[ $1 == *"per."* ]]; then
-        nvim $note_cmd/personal/$1.md
-    else
-        echo "opening notes...";
-        nvim $note_cmd/$1.md
-    fi
-}
-
 hist() {
     if [[ $1 == "-v" ]]; then
         history | grep --color $2 | nvim
@@ -118,9 +109,15 @@ hist() {
     fi
 }
 
+portify() {
+    sudo lsof -i:$1
+}
+
 # opam configuration
 [[ ! -r /Users/stefan.heller/.opam/opam-init/init.zsh ]] || source /Users/stefan.heller/.opam/opam-init/init.zsh  > /dev/null 2> /dev/null
 
 # Created by `pipx` on 2023-07-06 15:29:01
 export PATH="$PATH:/Users/stefan.heller/.local/bin"
 eval $(thefuck --alias)
+
+[[ -s "/Users/stefan.heller/.gvm/scripts/gvm" ]] && source "/Users/stefan.heller/.gvm/scripts/gvm"

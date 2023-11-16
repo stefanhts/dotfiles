@@ -42,3 +42,14 @@ vim.keymap.set("n", "<leader>cf", "<Esc>:e ~/.zshrc<Enter>")
 
 -- Nice remap to make Go less painfull
 vim.keymap.set("n", "<leader>ee", "oif err != nil {<CR>}<Esc>Oreturn err")
+
+-- Make vertical movements nice
+vim.keymap.set("n", "<C-u>", "<C-u>zz")
+vim.keymap.set("n", "<C-d>", "<C-d>zz")
+
+vim.keymap.set("i", "<C-u>", "<C-u>zz")
+vim.keymap.set("i", "<C-d>", "<C-d>zz")
+
+
+vim.keymap.set("n", "n", "nzz")
+vim.keymap.set("n", "N", "Nzz")
