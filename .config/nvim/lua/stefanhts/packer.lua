@@ -8,15 +8,10 @@ return require('packer').startup(function(use)
     use 'wbthomason/packer.nvim'
 
     use {
-        'nvim-telescope/telescope.nvim', tag = '0.1.0',
+        'nvim-telescope/telescope.nvim', tag = '0.1.5',
         -- or                            , branch = '0.1.x',
         requires = { { 'nvim-lua/plenary.nvim' } }
     }
-
-    -- use "tjdevries/ocaml.nvim"
-
-
-    use 'lukas-reineke/indent-blankline.nvim'
 
     use({
         "folke/trouble.nvim",
@@ -31,6 +26,13 @@ return require('packer').startup(function(use)
     })
 
     use({
+        "lukas-reineke/indent-blankline.nvim",
+        config = function()
+            require("ibl").setup()
+        end
+    })
+
+    use({
         "ellisonleao/gruvbox.nvim",
         as = 'gruvbox',
         config = function()
@@ -38,29 +40,9 @@ return require('packer').startup(function(use)
         end
     })
 
-    use({
-        "xiyaowong/transparent.nvim",
-        config = function()
-            require("transparent").setup({
-                groups = { -- table: default groups
-                    'Normal', 'NormalNC', 'Comment', 'Constant', 'Special', 'Identifier',
-                    'Statement', 'PreProc', 'Type', 'Underlined', 'Todo', 'String', 'Function',
-                    'Conditional', 'Repeat', 'Operator', 'Structure', 'LineNr', 'NonText',
-                    'SignColumn', 'CursorLineNr', 'EndOfBuffer',
-                },
-                extra_groups = {
-                    "NormalFloat",      -- plugins which have float panel such as Lazy, Mason, LspInfo
-                    "NvimTreeNormal" }, -- table: additional groups that should be cleared
-                exclude_groups = {},    -- table: groups you don't want to clear
-            })
-        end
-    })
-
-
     use({ "nvim-treesitter/nvim-treesitter", run = ":TSUpdate" })
     use("nvim-treesitter/playground")
     use("theprimeagen/harpoon")
-    use("theprimeagen/refactoring.nvim")
     use("mbbill/undotree")
     use("tpope/vim-fugitive")
     use("nvim-treesitter/nvim-treesitter-context");
@@ -87,17 +69,8 @@ return require('packer').startup(function(use)
             { 'rafamadriz/friendly-snippets' },
         }
     }
-    use({
-        'rose-pine/neovim',
-        as = 'rose-pine',
-        config = function()
-            vim.cmd('colorscheme rose-pine')
-        end
-    })
-
 
     use("folke/zen-mode.nvim")
-    use("eandrju/cellular-automaton.nvim")
     use("laytan/cloak.nvim")
     use('f-person/git-blame.nvim')
     use { 'windwp/nvim-autopairs',

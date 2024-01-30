@@ -114,6 +114,9 @@ vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = "Open diagn
 require('lualine').setup()
 require('Comment').setup()
 
+vim.o.background = "dark"
+vim.cmd([[colorscheme gruvbox]])
+
 vim.g.netrw_browse_split = 0
 vim.g.netrw_banner = 0
 vim.g.netrw_winsize = 25

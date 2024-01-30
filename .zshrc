@@ -31,6 +31,8 @@ alias kx="kubectx"
 alias kn="kubens"
 alias k="kubecolor"
 alias ls="eza -l"
+alias sesh="workspaceizer"
+alias open="opendir.sh"
 # alias ls=pls
 alias kubectl=kubecolor
 alias kubesync="layer0 kubeconfig sync"
@@ -48,7 +50,9 @@ unalias gk
 alias python=python3
 export PATH="/opt/homebrew/opt/postgresql@15/bin:$PATH"
 export PATH="/usr/local/opt/mongodb-community@4.4/bin:$PATH"
+export PATH="/Users/stefan.heller/learning/task-queue:$PATH"
 export PATH="$HOME/bin:$PATH"
+export PATH="$HOME/scripts:$PATH"
 export GOPATH=$HOME/go
 export PATH="/usr/local/bin/od:$PATH"
 export PATH="$PATH:$(go env GOPATH)/bin"
@@ -66,7 +70,9 @@ export CDPATH=".:$HOME/Documents/Videos:$CDPATH"
 export CDPATH=".:$HOME/Documents/Personal:$CDPATH"
 
 export REPOS="$HOME/Work/repos/"
+export LEARNING="$HOME/learning/"
 alias repos="cd $REPOS"
+alias learning="cd $LEARNING"
 
 alias notes="cd $HOME/Work/notes"
 

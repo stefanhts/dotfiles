@@ -17,7 +17,7 @@ end
 config.font = wezterm.font { family = 'Liga SFMono Nerd Font' }
 config.font_size = 19
 
-config.color_scheme = "Dracula (Official)"
+config.color_scheme = "Gruvbox dark, pale (base16)"
 config.tab_bar_at_bottom = true
 config.use_fancy_tab_bar = false
 
@@ -46,22 +46,22 @@ config.keys = {
     -- Switch between panes
     {
         key = 'LeftArrow',
-        mods = 'SHIFT',
+        mods = 'ALT',
         action = act.ActivatePaneDirection 'Left',
     },
     {
         key = 'RightArrow',
-        mods = 'SHIFT',
+        mods = 'ALT',
         action = act.ActivatePaneDirection 'Right',
     },
     {
         key = 'UpArrow',
-        mods = 'SHIFT',
+        mods = 'ALT',
         action = act.ActivatePaneDirection 'Up',
     },
     {
         key = 'DownArrow',
-        mods = 'SHIFT',
+        mods = 'ALT',
         action = act.ActivatePaneDirection 'Down',
     },
     -- Cycle Tabs
