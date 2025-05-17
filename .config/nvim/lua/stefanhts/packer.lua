@@ -5,7 +5,51 @@ vim.cmd.packadd('packer.nvim')
 
 return require('packer').startup(function(use)
     -- Packer can manage itself
-    use 'wbthomason/packer.nvim'
+    use({
+        'wbthomason/packer.nvim',
+        dependencies = {
+            'williamboman/mason-lspconfig.nvim',
+            'neovim/nvim-lspconfig',
+            'hrsh7th/nvim-cmp',
+        },
+        config = function()
+            require('mason').setup()
+            require('mason-lspconfig').setup({
+                ensure_installed = {
+                    'lua_ls',
+                    'gopls',
+                    'tsserver',
+                    'pyright',
+                    'eslint',
+                    'rust_analyzer',
+                    'emmet_language_server',
+                    'jsonls'
+                },
+            })
+            require('mason-lspconfig').setup()
+
+            require('mason-lspconfig').setup_handlers({
+                function(server_name)
+                    if server_name == "tsserver" then
+                        server_name = "ts_ls"
+                    end
+                    local capabilities = require("cmp_nvim_lsp").default_capabilities()
+                    require("lspconfig")[server_name].setup({
+                        capabilities = capabilities,
+                    })
+                end,
+            })
+        end,
+    })
+    -- install without yarn or npm
+    use({
+        "iamcco/markdown-preview.nvim",
+        run = function() vim.fn["mkdp#util#install"]() end,
+    })
+
+    use({ "iamcco/markdown-preview.nvim", run = "cd app && npm install", setup = function() vim.g.mkdp_filetypes = { "markdown" } end, ft = { "markdown" }, })
+
+    use({ 'kepano/flexoki-neovim', as = 'flexoki' })
 
     use {
         'nvim-telescope/telescope.nvim', tag = '0.1.5',
@@ -25,18 +69,12 @@ return require('packer').startup(function(use)
         end
     })
 
+    use { "catppuccin/nvim", as = "catppuccin" }
+
     use({
         "lukas-reineke/indent-blankline.nvim",
         config = function()
             require("ibl").setup()
-        end
-    })
-
-    use({
-        "ellisonleao/gruvbox.nvim",
-        as = 'gruvbox',
-        config = function()
-            vim.cmd('colorscheme gruvbox')
         end
     })
 

@@ -53,3 +53,5 @@ vim.keymap.set("i", "<C-d>", "<C-d>zz")
 
 vim.keymap.set("n", "n", "nzz")
 vim.keymap.set("n", "N", "Nzz")
+
+vim.keymap.set("n", "<leader>t", ":belowright split | resize 20 | terminal<CR>")

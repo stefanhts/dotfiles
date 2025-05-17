@@ -14,10 +14,10 @@ end
 
 -- This is where you actually apply your config choices
 
-config.font = wezterm.font { family = 'Liga SFMono Nerd Font' }
+config.font = wezterm.font { family = 'Comic Mono' }
 config.font_size = 19
 
-config.color_scheme = "Gruvbox dark, pale (base16)"
+config.color_scheme = "flexoki-dark"
 config.tab_bar_at_bottom = true
 config.use_fancy_tab_bar = false
 
@@ -25,7 +25,14 @@ wezterm.on('update-right-status', function(window, pane)
     window:set_right_status(window:active_workspace())
 end)
 
+config.leader = { key = 'a', mods = 'CTRL', timeout_milliseconds = 1000 }
+
 config.keys = {
+    {
+      key = "a",
+      mods = "LEADER|CTRL",
+      action = wezterm.action.SendKey { key = 'a', mods = 'CTRL' },
+    },
     -- ToggleFullScreen
     {
         key = 'n',
@@ -45,31 +52,31 @@ config.keys = {
     },
     -- Switch between panes
     {
-        key = 'LeftArrow',
+        key = 'h',
         mods = 'ALT',
         action = act.ActivatePaneDirection 'Left',
     },
     {
-        key = 'RightArrow',
+        key = 'l',
         mods = 'ALT',
         action = act.ActivatePaneDirection 'Right',
     },
     {
-        key = 'UpArrow',
+        key = 'k',
         mods = 'ALT',
         action = act.ActivatePaneDirection 'Up',
     },
     {
-        key = 'DownArrow',
+        key = 'j',
         mods = 'ALT',
         action = act.ActivatePaneDirection 'Down',
     },
     -- Cycle Tabs
     {
-        key = 'h', mods = 'ALT', action = act.ActivateTabRelative(-1)
+        key = 'h', mods = 'ALT|SHIFT', action = act.ActivateTabRelative(-1)
     },
     {
-        key = 'l', mods = 'ALT', action = act.ActivateTabRelative(1)
+        key = 'l', mods = 'ALT|SHIFT', action = act.ActivateTabRelative(1)
     },
     -- Switch to the default workspace
     {
@@ -97,8 +104,8 @@ config.keys = {
         },
     },
     {
-        key = 'h',
-        mods = 'CTRL',
+        key = 'f',
+        mods = 'SUPER|SHIFT',
         action = act.ShowLauncherArgs {
             flags = 'FUZZY|WORKSPACES'
         }
@@ -114,41 +121,28 @@ config.keys = {
             },
         },
     },
-    { key = 'l', mods = 'CTRL',       action = wezterm.action.ShowLauncher },
+    { key = 'l', mods = 'SUPER',       action = wezterm.action.ShowLauncher },
     -- Create a new workspace with a random name and switch to it
     { key = 'i', mods = 'CTRL|SHIFT', action = act.SwitchToWorkspace },
     { key = 'l', mods = 'CTRL|SHIFT', action = act.SwitchWorkspaceRelative(1) },
     { key = 'h', mods = 'CTRL|SHIFT', action = act.SwitchWorkspaceRelative(-1) },
 }
 
-wezterm.on('gui-startup', function(cmd)
-    local args = {}
-    if cmd then
-        args = cmd.args
-    end
-
-    local project_dir = wezterm.home_dir .. '/Work/repos/'
-    local tab, build_pane, window = mux.spawn_window {
-        workspace = 'coding',
-        cwd = project_dir,
-        args = args,
-    }
-    local editor_pane = build_pane:split {
-        direction = 'Left',
-        size = 0.6,
-        cwd = project_dir,
-    }
-    build_pane:send_text 'nvim .\n'
-
-    local notes_dir = wezterm.home_dir .. '/Work/notes'
-    local tab, pane, window = mux.spawn_window {
-        cwd = notes_dir,
-        workspace = 'notes',
-    }
-    pane:send_text 'nvim . \n'
-    mux.set_active_workspace 'coding'
-end)
-
+-- wezterm.on('gui-startup', function(cmd)
+--
+--     local project_dir = wezterm.home_dir .. '/Work/repos/'
+--     local args = { "nvim /Users/stefan.heller/Work/repos/"}
+--
+--     local tab, build_pane, window = mux.spawn_window {
+--         workspace = 'coding',
+--         cwd = project_dir,
+--         args = args,
+--     }
+--
+--
+--     mux.set_active_workspace 'coding'
+-- end)
+--
 
 -- and finally, return the configuration to wezterm
 return config

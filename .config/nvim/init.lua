@@ -102,7 +102,7 @@ require('nvim-treesitter.configs').setup {
     },
 }
 -- Auto format on save
-vim.cmd [[autocmd BufWritePre * lua vim.lsp.buf.format()]]
+-- vim.cmd [[autocmd BufWritePre * lua vim.lsp.buf.format()]]
 
 -- Diagnostic keymaps
 vim.keymap.set('n', '{d', vim.diagnostic.goto_prev, { desc = "Go to previous diagnostic message" })
@@ -115,7 +115,7 @@ require('lualine').setup()
 require('Comment').setup()
 
 vim.o.background = "dark"
-vim.cmd([[colorscheme gruvbox]])
+vim.cmd.colorscheme "flexoki-dark"
 
 vim.g.netrw_browse_split = 0
 vim.g.netrw_banner = 0
