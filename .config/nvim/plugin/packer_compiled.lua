@@ -49,8 +49,8 @@ local function save_profiles(threshold)
 end
 
 time([[Luarocks path setup]], true)
-local package_path_str = "/Users/stefan.heller/.cache/nvim/packer_hererocks/2.1.1736781742/share/lua/5.1/?.lua;/Users/stefan.heller/.cache/nvim/packer_hererocks/2.1.1736781742/share/lua/5.1/?/init.lua;/Users/stefan.heller/.cache/nvim/packer_hererocks/2.1.1736781742/lib/luarocks/rocks-5.1/?.lua;/Users/stefan.heller/.cache/nvim/packer_hererocks/2.1.1736781742/lib/luarocks/rocks-5.1/?/init.lua"
-local install_cpath_pattern = "/Users/stefan.heller/.cache/nvim/packer_hererocks/2.1.1736781742/lib/lua/5.1/?.so"
+local package_path_str = "/Users/stefan.heller/.cache/nvim/packer_hererocks/2.1.1744318430/share/lua/5.1/?.lua;/Users/stefan.heller/.cache/nvim/packer_hererocks/2.1.1744318430/share/lua/5.1/?/init.lua;/Users/stefan.heller/.cache/nvim/packer_hererocks/2.1.1744318430/lib/luarocks/rocks-5.1/?.lua;/Users/stefan.heller/.cache/nvim/packer_hererocks/2.1.1744318430/lib/luarocks/rocks-5.1/?/init.lua"
+local install_cpath_pattern = "/Users/stefan.heller/.cache/nvim/packer_hererocks/2.1.1744318430/lib/lua/5.1/?.so"
 if not string.find(package.path, package_path_str, 1, true) then
   package.path = package.path .. ';' .. package_path_str
 end
@@ -157,8 +157,10 @@ _G.packer_plugins = {
     url = "https://github.com/nvim-lualine/lualine.nvim"
   },
   ["markdown-preview.nvim"] = {
-    loaded = true,
-    path = "/Users/stefan.heller/.local/share/nvim/site/pack/packer/start/markdown-preview.nvim",
+    loaded = false,
+    needs_bufread = false,
+    only_cond = false,
+    path = "/Users/stefan.heller/.local/share/nvim/site/pack/packer/opt/markdown-preview.nvim",
     url = "https://github.com/iamcco/markdown-preview.nvim"
   },
   ["mason-lspconfig.nvim"] = {
@@ -204,7 +206,7 @@ _G.packer_plugins = {
     url = "https://github.com/nvim-tree/nvim-web-devicons"
   },
   ["packer.nvim"] = {
-    config = { "\27LJ\2\n²\1\0\1\5\0\t\0\17\a\0\0\0X\1\1€'\0\1\0006\1\2\0'\3\3\0B\1\2\0029\1\4\1B\1\1\0026\2\2\0'\4\5\0B\2\2\0028\2\0\0029\2\6\0025\4\a\0=\1\b\4B\2\2\1K\0\1\0\17capabilities\1\0\1\17capabilities\0\nsetup\14lspconfig\25default_capabilities\17cmp_nvim_lsp\frequire\nts_ls\rtsserver¡\2\1\0\4\0\t\0\0276\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\0016\0\0\0'\2\3\0B\0\2\0029\0\2\0005\2\5\0005\3\4\0=\3\6\2B\0\2\0016\0\0\0'\2\3\0B\0\2\0029\0\2\0B\0\1\0016\0\0\0'\2\3\0B\0\2\0029\0\a\0004\2\3\0003\3\b\0>\3\1\2B\0\2\1K\0\1\0\0\19setup_handlers\21ensure_installed\1\0\1\21ensure_installed\0\1\t\0\0\vlua_ls\ngopls\rtsserver\fpyright\veslint\18rust_analyzer\26emmet_language_server\vjsonls\20mason-lspconfig\nsetup\nmason\frequire\0" },
+    config = { "\27LJ\2\nè\1\0\0\4\0\a\0\0196\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\0016\0\0\0'\2\3\0B\0\2\0029\0\2\0005\2\5\0005\3\4\0=\3\6\2B\0\2\0016\0\0\0'\2\3\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\21ensure_installed\1\0\1\21ensure_installed\0\1\b\0\0\vlua_ls\ngopls\fpyright\veslint\18rust_analyzer\26emmet_language_server\vjsonls\20mason-lspconfig\nsetup\nmason\frequire\0" },
     loaded = true,
     path = "/Users/stefan.heller/.local/share/nvim/site/pack/packer/start/packer.nvim",
     url = "https://github.com/wbthomason/packer.nvim"
@@ -240,6 +242,12 @@ _G.packer_plugins = {
     path = "/Users/stefan.heller/.local/share/nvim/site/pack/packer/start/vim-fugitive",
     url = "https://github.com/tpope/vim-fugitive"
   },
+  ["yazi.nvim"] = {
+    config = { "\27LJ\2\nr\0\0\4\0\6\0\t6\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\4\0005\3\3\0=\3\5\2B\0\2\1K\0\1\0\17dependencies\1\0\1\17dependencies\0\1\2\0\0\22folke/snacks.nvim\nsetup\tyazi\frequire\0" },
+    loaded = true,
+    path = "/Users/stefan.heller/.local/share/nvim/site/pack/packer/start/yazi.nvim",
+    url = "https://github.com/mikavilpas/yazi.nvim"
+  },
   ["zen-mode.nvim"] = {
     loaded = true,
     path = "/Users/stefan.heller/.local/share/nvim/site/pack/packer/start/zen-mode.nvim",
@@ -248,10 +256,14 @@ _G.packer_plugins = {
 }
 
 time([[Defining packer_plugins]], false)
--- Config for: nvim-autopairs
-time([[Config for nvim-autopairs]], true)
-try_loadstring("\27LJ\2\n@\0\0\3\0\3\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0004\2\0\0B\0\2\1K\0\1\0\nsetup\19nvim-autopairs\frequire\0", "config", "nvim-autopairs")
-time([[Config for nvim-autopairs]], false)
+-- Setup for: markdown-preview.nvim
+time([[Setup for markdown-preview.nvim]], true)
+try_loadstring("\27LJ\2\n=\0\0\2\0\4\0\0056\0\0\0009\0\1\0005\1\3\0=\1\2\0K\0\1\0\1\2\0\0\rmarkdown\19mkdp_filetypes\6g\bvim\0", "setup", "markdown-preview.nvim")
+time([[Setup for markdown-preview.nvim]], false)
+-- Config for: yazi.nvim
+time([[Config for yazi.nvim]], true)
+try_loadstring("\27LJ\2\nr\0\0\4\0\6\0\t6\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\4\0005\3\3\0=\3\5\2B\0\2\1K\0\1\0\17dependencies\1\0\1\17dependencies\0\1\2\0\0\22folke/snacks.nvim\nsetup\tyazi\frequire\0", "config", "yazi.nvim")
+time([[Config for yazi.nvim]], false)
 -- Config for: indent-blankline.nvim
 time([[Config for indent-blankline.nvim]], true)
 try_loadstring("\27LJ\2\n1\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\bibl\frequire\0", "config", "indent-blankline.nvim")
@@ -262,12 +274,23 @@ try_loadstring("\27LJ\2\n5\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K
 time([[Config for Comment.nvim]], false)
 -- Config for: packer.nvim
 time([[Config for packer.nvim]], true)
-try_loadstring("\27LJ\2\n²\1\0\1\5\0\t\0\17\a\0\0\0X\1\1€'\0\1\0006\1\2\0'\3\3\0B\1\2\0029\1\4\1B\1\1\0026\2\2\0'\4\5\0B\2\2\0028\2\0\0029\2\6\0025\4\a\0=\1\b\4B\2\2\1K\0\1\0\17capabilities\1\0\1\17capabilities\0\nsetup\14lspconfig\25default_capabilities\17cmp_nvim_lsp\frequire\nts_ls\rtsserver¡\2\1\0\4\0\t\0\0276\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\0016\0\0\0'\2\3\0B\0\2\0029\0\2\0005\2\5\0005\3\4\0=\3\6\2B\0\2\0016\0\0\0'\2\3\0B\0\2\0029\0\2\0B\0\1\0016\0\0\0'\2\3\0B\0\2\0029\0\a\0004\2\3\0003\3\b\0>\3\1\2B\0\2\1K\0\1\0\0\19setup_handlers\21ensure_installed\1\0\1\21ensure_installed\0\1\t\0\0\vlua_ls\ngopls\rtsserver\fpyright\veslint\18rust_analyzer\26emmet_language_server\vjsonls\20mason-lspconfig\nsetup\nmason\frequire\0", "config", "packer.nvim")
+try_loadstring("\27LJ\2\nè\1\0\0\4\0\a\0\0196\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\0016\0\0\0'\2\3\0B\0\2\0029\0\2\0005\2\5\0005\3\4\0=\3\6\2B\0\2\0016\0\0\0'\2\3\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\21ensure_installed\1\0\1\21ensure_installed\0\1\b\0\0\vlua_ls\ngopls\fpyright\veslint\18rust_analyzer\26emmet_language_server\vjsonls\20mason-lspconfig\nsetup\nmason\frequire\0", "config", "packer.nvim")
 time([[Config for packer.nvim]], false)
 -- Config for: trouble.nvim
 time([[Config for trouble.nvim]], true)
 try_loadstring("\27LJ\2\nC\0\0\3\0\4\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\3\0B\0\2\1K\0\1\0\1\0\1\nicons\1\nsetup\ftrouble\frequire\0", "config", "trouble.nvim")
 time([[Config for trouble.nvim]], false)
+-- Config for: nvim-autopairs
+time([[Config for nvim-autopairs]], true)
+try_loadstring("\27LJ\2\n@\0\0\3\0\3\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0004\2\0\0B\0\2\1K\0\1\0\nsetup\19nvim-autopairs\frequire\0", "config", "nvim-autopairs")
+time([[Config for nvim-autopairs]], false)
+vim.cmd [[augroup packer_load_aucmds]]
+vim.cmd [[au!]]
+  -- Filetype lazy-loads
+time([[Defining lazy-load filetype autocommands]], true)
+vim.cmd [[au FileType markdown ++once lua require("packer.load")({'markdown-preview.nvim'}, { ft = "markdown" }, _G.packer_plugins)]]
+time([[Defining lazy-load filetype autocommands]], false)
+vim.cmd("augroup END")
 
 _G._packer.inside_compile = false
 if _G._packer.needs_bufread == true then

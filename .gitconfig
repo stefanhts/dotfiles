@@ -1,11 +1,11 @@
 [user]
 	name = Stefan Heller
 	email = stefan.heller@okta.com
+	signingkey = 7082120B4788575A
 [core]
     editor = nvim
 	excludesfile = /Users/stefan.heller/.gitignore
-[url "git@github.com:"]
-	insteadOf = https://github.com/
+	sshCommand = /usr/local/bin/ocm handler ssh
 [init]
 	defaultBranch = main
 [filter "lfs"]
@@ -16,3 +16,12 @@
 [alias]
     what = diff --cached
     oneline = log --oneline
+[credential]
+	useHttpPath = true
+	helper = /usr/local/bin/ocm handler https
+[commit]
+	gpgsign = true
+[gpg]
+	program = /opt/homebrew/bin/gpg
+[http]
+	postBuffer = 157286400

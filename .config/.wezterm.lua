@@ -17,9 +17,16 @@ end
 config.font = wezterm.font { family = 'Comic Mono' }
 config.font_size = 19
 
-config.color_scheme = "flexoki-dark"
+config.color_scheme = "catppuccin-macchiato"
 config.tab_bar_at_bottom = true
 config.use_fancy_tab_bar = false
+
+--config.window_background_image = '/Users/stefan.heller/Desktop/qm2.jpeg'
+--config.window_background_image_hsb = {
+--    brightness = 0.2,
+--    saturation = 1,
+--    hue = 1,
+--}
 
 wezterm.on('update-right-status', function(window, pane)
     window:set_right_status(window:active_workspace())
@@ -53,30 +60,30 @@ config.keys = {
     -- Switch between panes
     {
         key = 'h',
-        mods = 'ALT',
+        mods = 'CTRL',
         action = act.ActivatePaneDirection 'Left',
     },
     {
         key = 'l',
-        mods = 'ALT',
+        mods = 'CTRL',
         action = act.ActivatePaneDirection 'Right',
     },
     {
         key = 'k',
-        mods = 'ALT',
+        mods = 'CTRL',
         action = act.ActivatePaneDirection 'Up',
     },
     {
         key = 'j',
-        mods = 'ALT',
+        mods = 'CTRL',
         action = act.ActivatePaneDirection 'Down',
     },
     -- Cycle Tabs
     {
-        key = 'h', mods = 'ALT|SHIFT', action = act.ActivateTabRelative(-1)
+        key = 'h', mods = 'ALT|SHIFT|CTRL', action = act.ActivateTabRelative(-1)
     },
     {
-        key = 'l', mods = 'ALT|SHIFT', action = act.ActivateTabRelative(1)
+        key = 'l', mods = 'ALT|SHIFT|CTRL', action = act.ActivateTabRelative(1)
     },
     -- Switch to the default workspace
     {
@@ -104,16 +111,17 @@ config.keys = {
         },
     },
     {
-        key = 'f',
-        mods = 'SUPER|SHIFT',
+        key = 's',
+        mods = 'CTRL|SHIFT|ALT',
         action = act.ShowLauncherArgs {
-            flags = 'FUZZY|WORKSPACES'
+            title= "Select workspace",
+            flags = 'WORKSPACES',
         }
     },
     -- Switch to a monitoring workspace, which will have `top` launched into it
     {
         key = 'u',
-        mods = 'CTRL|SHIFT',
+        mods = 'CTRL|SHIFT|ALT',
         action = act.SwitchToWorkspace {
             name = 'github-status',
             spawn = {
