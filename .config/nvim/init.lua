@@ -2,7 +2,7 @@ require("stefanhts.set")
 require("stefanhts.remap")
 
 require("config.lazy")
-require('lualine').setup()
+require('lualine').setup({})
 require('lspconfig')
 
 vim.o.ignorecase = true
@@ -33,3 +33,5 @@ vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = "Open diagn
 vim.cmd.colorscheme "catppuccin"
 
 vim.opt.list = true
+
+-- Config Terminal

@@ -1,0 +1,63 @@
+theme = "dracula"
+font-size = 24
+unfocused-split-opacity = 1
+window-inherit-font-size = true
+window-save-state = always
+confirm-close-surface = false
+macos-option-as-alt = true
+bold-is-bright = true
+font-family = "ComicShannsMono Nerd Font Mono"
+
+# meta behavior
+copy-on-select = true
+quit-after-last-window-closed = true
+shell-integration = zsh
+
+
+# cursor
+cursor-style = "block"
+cursor-color = "#fb05ff"
+cursor-style-blink = true
+cursor-opacity = 1
+cursor-click-to-move = true
+macos-non-native-fullscreen = true
+macos-titlebar-style = tabs
+macos-icon = xray
+macos-icon-frame = plastic
+
+
+
+# new splits
+keybind = ctrl+'=new_split:right
+keybind = ctrl+s=new_split:down
+
+# navigate splits
+keybind = super+h=goto_split:left
+keybind = super+l=goto_split:right
+keybind = super+j=goto_split:bottom
+keybind = super+k=goto_split:top
+
+# resize splits
+keybind = super+shift+l=resize_split:right,50
+keybind = super+shift+h=resize_split:left,50
+keybind = super+shift+k=resize_split:up,50
+keybind = super+shift+j=resize_split:down,50
+
+
+keybind = super+shift+c=equalize_splits
+
+
+
+
+keybind = ctrl+b=jump_to_prompt:-1
+keybind = ctrl+w=jump_to_prompt:1
+
+keybind = super+shift+l=next_tab
+keybind = super+shift+h=previous_tab
+
+# toggle inspector
+keybind = ctrl+alt+shift+i=inspector:toggle
+
+# Quick Terminal
+keybind = global:super+shift+o=toggle_quick_terminal
+quick-terminal-position = center

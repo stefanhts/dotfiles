@@ -1,8 +1,8 @@
 return {
   {
     "folke/tokyonight.nvim",
-    lazy = false,        -- make sure we load this during startup if it is your main colorscheme
-    priority = 1000,     -- make sure to load this before all the other start plugins
+    lazy = false,    -- make sure we load this during startup if it is your main colorscheme
+    priority = 1000, -- make sure to load this before all the other start plugins
     config = function()
       vim.cmd([[colorscheme tokyonight]])
     end,
@@ -106,8 +106,6 @@ return {
   {
     "mikavilpas/yazi.nvim",
     init = function()
-      -- Block netrw plugin load
-      -- vim.g.loaded_netrw = 1
       vim.g.loaded_netrwPlugin = 1
     end,
     event = "VeryLazy",
