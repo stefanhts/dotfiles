@@ -2,3 +2,5 @@
 .vscode
 .vscode/settings.json
 .zed
+.idea
+copilot-instructions.md

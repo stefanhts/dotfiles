@@ -16,6 +16,9 @@
 [alias]
     what = diff --cached
     oneline = log --oneline
+    up = !git pull origin $(git remote show origin | grep 'HEAD branch' | awk '{print $NF}') --rebase
+    br = !git branch | fzf | xargs git checkout
+    pushf = !git push -u origin $(git rev-parse --abbrev-ref HEAD) --force-with-lease
 [credential]
 	useHttpPath = true
 	helper = /usr/local/bin/ocm handler https
@@ -25,3 +28,55 @@
 	program = /opt/homebrew/bin/gpg
 [http]
 	postBuffer = 157286400
+[url "https://github.com/"]
+	insteadOf = org-133040856@github.com:
+	insteadOf = org-154630042@github.com:
+	insteadOf = org-172422791@github.com:
+	insteadOf = org-154638976@github.com:
+	insteadOf = org-160787757@github.com:
+	insteadOf = org-133164830@github.com:
+	insteadOf = org-150478961@github.com:
+	insteadOf = org-129778737@github.com:
+	insteadOf = org-130110283@github.com:
+	insteadOf = org-165719403@github.com:
+	insteadOf = org-172423837@github.com:
+	insteadOf = org-132695841@github.com:
+	insteadOf = org-137924631@github.com:
+	insteadOf = org-132695862@github.com:
+	insteadOf = org-131313878@github.com:
+	insteadOf = org-188514996@github.com:
+	insteadOf = org-154639104@github.com:
+	insteadOf = org-132695906@github.com:
+	insteadOf = org-170476665@github.com:
+	insteadOf = org-172021216@github.com:
+	insteadOf = org-132288863@github.com:
+	insteadOf = org-132695826@github.com:
+	insteadOf = org-132609621@github.com:
+	insteadOf = org-129772913@github.com:
+	insteadOf = org-20732911@github.com:
+	insteadOf = org-2824157@github.com:
+	insteadOf = org-18200246@github.com:
+	insteadOf = org-12984283@github.com:
+	insteadOf = org-83293008@github.com:
+	insteadOf = org-100300620@github.com:
+	insteadOf = org-18216588@github.com:
+	insteadOf = org-86717427@github.com:
+	insteadOf = org-99855655@github.com:
+	insteadOf = org-18199888@github.com:
+	insteadOf = org-83660634@github.com:
+	insteadOf = org-2256919@github.com:
+	insteadOf = org-47133013@github.com:
+	insteadOf = org-6887375@github.com:
+	insteadOf = org-12036585@github.com:
+	insteadOf = org-362460@github.com:
+	insteadOf = org-178190583@github.com:
+	insteadOf = org-137924650@github.com:
+	insteadOf = org-36548112@github.com:
+	insteadOf = org-37557815@github.com:
+	insteadOf = org-43153584@github.com:
+	insteadOf = org-103601614@github.com:
+	insteadOf = org-12057610@github.com:
+	insteadOf = org-109475049@github.com:
+	insteadOf = org-128319376@github.com:
+	insteadOf = org-114023065@github.com:
+	insteadOf = org-130709512@github.com:
